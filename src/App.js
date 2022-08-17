@@ -1,25 +1,28 @@
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LandingPage from './component/landingPage/landingPage';
+import AdminLogin from './component/authentication/adminLogin';
+import UserLogin from './component/authentication/userLogin';
+import UserSignup from './component/authentication/userSignup';
+import RegisterEvent from './component/eventRegisteration/event';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Router>
+			<div className="App">
+				<Routes>
+					<Route path="/" element={<LandingPage />} />
+					<Route path="/adminLogin" element={<AdminLogin />} />
+					<Route path="/login" element={<UserLogin />} />
+					<Route path="/signup" element={<UserSignup />} />
+					<Route path="/registerEvent" element={<RegisterEvent />} />
+				</Routes>
+			</div>
+		</Router>
+	);
 }
 
 export default App;
