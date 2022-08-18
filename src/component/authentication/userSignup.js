@@ -22,7 +22,7 @@ const UserSignup = () => {
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className="input-container">
 							<label>Phone Number </label>
-							<input {...register('phoneNumber', { required: true })} placeholder="something@gmail" />
+							<input {...register('phoneNumber', { required: true })} placeholder="mobile number" />
 							{errors.phoneNumber && <span className="fontcolor">This field is required</span>}
 						</div>
 						<div className="input-container">

@@ -3,38 +3,45 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Header from '../header/header';
+import { Link, useNavigate } from 'react-router-dom';
 import { Submit } from './../../configApi/function';
 
-const AdminLogin = () => {
+const Verify = () => {
 	const { register, handleSubmit, watch, formState: { errors } } = useForm();
-
+	const navigate = useNavigate();
 	const onSubmit = async (data) => {
-		console.log('submitted');
-		const res = await Submit(data, '/adminlogin', 'post');
-		if (res.status == 200) {
+		const res = await Submit(data, '/verify', 'post');
+		if (res.status === 200) {
 			alert('success');
-			localStorage.setItem('admin', 'true');
-			localStorage.setItem('user', '7903578628');
+			localStorage.setItem('user', res.data.data.phoneNumber);
+			localStorage.setItem('isLoggedIn', true);
+			setTimeout(function() {
+				navigate('/');
+			}, 1000);
 		} else {
-			alert('fail');
+			alert('failed');
 		}
 	};
 	return (
 		<React.Fragment>
 			<Header />
-			<h1>Admin Login</h1>
 			<Wrapper>
 				<div className="form">
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className="input-container">
-							<label>phoneNumber </label>
-							<input {...register('phoneNumber', { required: true })} placeholder="something@gmail" />
+							<label>Event Name </label>
+							<input {...register('eventName', { required: true })} placeholder="event name" />
+							{errors.eventName && <span className="fontcolor">This field is required</span>}
+						</div>
+						<div className="input-container">
+							<label>phone number </label>
+							<input {...register('phoneNumber', { required: true })} placeholder="id" />
 							{errors.phoneNumber && <span className="fontcolor">This field is required</span>}
 						</div>
 						<div className="input-container">
-							<label>Password </label>
-							<input {...register('password', { required: true })} placeholder="password" />
-							{errors.password && <span className="fontcolor">This field is required</span>}
+							<label>unique code </label>
+							<input {...register('id', { required: true })} placeholder="id" />
+							{errors.id && <span className="fontcolor">This field is required</span>}
 						</div>
 						<div className="button-container">
 							<input type="submit" />
@@ -46,7 +53,7 @@ const AdminLogin = () => {
 	);
 };
 
-export default AdminLogin;
+export default Verify;
 
 const Wrapper = styled.div`
 	background-color: grey;

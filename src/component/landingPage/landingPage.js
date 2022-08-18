@@ -19,11 +19,11 @@ const LandingPage = () => {
 					See All Event
 				</Button>
 			</Link>
-			<Link to="/registered_event">
+			{/* <Link to="/registered_event">
 				<Button className="m-1" variant="success">
 					See All Registered Event
 				</Button>
-			</Link>
+			</Link> */}
 			<Footer />
 		</React.Fragment>
 	);

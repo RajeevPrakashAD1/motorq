@@ -29,12 +29,15 @@ export const getRegisteredEvents = async () => {
 		let data = {};
 		data['phoneNumber'] = localStorage.getItem('user');
 		const res = await Submit(data, '/getRegisteredEvents', 'post');
-		return res.data.data;
+		if (res && res.data && res.data.data) return res.data.data;
+		else return [];
+		// console.log('re.....', res);
+		//if (res) return res.data.data;
 		//const dispatch = useDispatch();
 		//console.log('even res', res);
 		//store.dispatch(addEvent(res.data.data));
 	} catch (err) {
-		console.log(err);
+		// console.log('get registered ->', err);
 		return err;
 	}
 };
@@ -60,7 +63,8 @@ export const checkClash = async (eventName, date, st, et) => {
 		var update = true;
 		if (events.length == 0) {
 			const res2 = await Submit({ phoneNumber: phoneNumber, eventName: eventName }, '/registerEvent', 'post');
-			alert('succefully registered');
+			alert('plz copy this code it will only let you enter in the event' + '                ' + res2.data);
+
 			update = false;
 		} else {
 			console.log('length', events.length);
@@ -93,7 +97,7 @@ export const checkClash = async (eventName, date, st, et) => {
 			}
 			if (update) {
 				const res2 = await Submit({ phoneNumber: phoneNumber, eventName: eventName }, '/registerEvent', 'post');
-				alert('succefully registered');
+				alert('plz copy this code it will only let you enter in the event' + '                ' + res2.data);
 				update = false;
 			} else {
 				alert('clashed');

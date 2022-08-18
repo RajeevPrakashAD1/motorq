@@ -17,7 +17,7 @@ const Footer = () => {
 						Register Event
 					</Button>
 				</Link>
-				<Link to="/verifyuser">
+				<Link to="/verify">
 					<Button className="m-1" variant="outline-secondary">
 						Verify User
 					</Button>

@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { checkClash, deregister, getEvents, getRegisteredEvents } from './../../configApi/utilFunction';
 import { useSelector } from 'react-redux';
+import { Submit } from './../../configApi/function';
 
 const EventDiv = ({ data }) => {
 	// console.log('props', data);
+	const navigate = useNavigate();
 	const event = useSelector((state) => state.event.event[0]);
 	const handleRegister = () => {
 		const res = checkClash(data.eventName, data.date, data.startTime, data.endTime);
@@ -28,7 +30,18 @@ const EventDiv = ({ data }) => {
 
 	const [ events, setevent ] = React.useState([]);
 	console.log(data);
-
+	const handleClick = () => {
+		navigate('/edit/' + data.eventName);
+	};
+	const handleDeleteClick = async () => {
+		const res = await Submit({ eventName: data.eventName }, '/deleteEvent', 'post');
+		if (res.status === 200) {
+			alert('success');
+			setTimeout(() => window.location.reload(false), 500);
+		} else {
+			alert('error');
+		}
+	};
 	const fetData = async (data) => {
 		const res = await getRegisteredEvents();
 		setevent(res);
@@ -51,7 +64,6 @@ const EventDiv = ({ data }) => {
 			</div>
 			<div> Candidates Allowed: {data.candidatesAllowed}</div>
 			<div> Candidates Registered: {data.candidatesRegistered}</div>
-
 			<Button onClick={() => handleRegister()} className="m-1" variant="success">
 				Register
 			</Button>
@@ -59,6 +71,19 @@ const EventDiv = ({ data }) => {
 				DeRegister
 			</Button>
 			<p>{events.includes(data.eventName) ? 'registered' : 'not regiestered'}</p>
+
+			{localStorage.getItem('admin') == 'true' ? (
+				<Button variant="primary" onClick={handleClick}>
+					{' '}
+					edit{' '}
+				</Button>
+			) : null}
+			{localStorage.getItem('admin') == 'true' ? (
+				<Button variant="danger" onClick={handleDeleteClick}>
+					{' '}
+					delete{' '}
+				</Button>
+			) : null}
 		</Wrapper>
 	);
 };
