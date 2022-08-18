@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Header from '../header/header';
 import { Submit } from './../../configApi/function';
+import Button from 'react-bootstrap/Button';
 
 const AdminLogin = () => {
 	const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -37,7 +38,9 @@ const AdminLogin = () => {
 							{errors.password && <span className="fontcolor">This field is required</span>}
 						</div>
 						<div className="button-container">
-							<input type="submit" />
+							<Button variant="primary" type="submit">
+								Submit{' '}
+							</Button>
 						</div>
 					</form>
 				</div>
@@ -50,17 +53,20 @@ export default AdminLogin;
 
 const Wrapper = styled.div`
 	background-color: grey;
-	width: 100%;
+	width: 100vw;
+	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+
 	.input-container {
-		${'' /* background-color: #fff; */} margin: 20px;
+		${'' /* background-color: blue; */} margin: 20px;
 		width: 300px;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		justify-content: space-around;
+		justify-content: space-between;
+		background-color: #42f5d1;
 	}
 `;

@@ -5,18 +5,31 @@ import axios from 'axios';
 import Header from '../header/header';
 import { Submit } from './../../configApi/function';
 
+import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
+
 const UserSignup = () => {
 	const { register, handleSubmit, watch, formState: { errors } } = useForm();
-
+	const navigate = useNavigate();
 	const onSubmit = async (data) => {
-		console.log('submitted');
-		console.log(data);
+		if (data.phoneNumber.length != 10) {
+			alert('plz provide a valid number');
+			return;
+		}
+		// console.log('submitted');
+		// console.log(data);
 		const res = await Submit(data, '/register', 'post');
-		if (res) alert('success');
+
+		if (res.status === 'successful') {
+			alert('success');
+
+			navigate('/');
+		}
 	};
 	return (
 		<React.Fragment>
 			<Header />
+			<h1>signup</h1>
 			<Wrapper>
 				<div className="form">
 					<form onSubmit={handleSubmit(onSubmit)}>
@@ -46,7 +59,9 @@ const UserSignup = () => {
 							{errors.password && <span className="fontcolor">This field is required</span>}
 						</div>
 						<div className="button-container">
-							<input type="submit" />
+							<Button variant="primary" type="submit">
+								Submit{' '}
+							</Button>
 						</div>
 					</form>
 				</div>
@@ -64,12 +79,15 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	width: 100vw;
+	height: 100vh;
 	.input-container {
 		${'' /* background-color: #fff; */} margin: 20px;
 		width: 300px;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		justify-content: space-around;
+		justify-content: space-between;
+		background-color: #42f5d1;
 	}
 `;

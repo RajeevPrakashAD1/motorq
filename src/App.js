@@ -13,6 +13,7 @@ import RegisteredEvent from './component/registeredEvents/registeredEvent';
 import { PrivateRoutes, AdminPrivateRoutes } from './component/authentication/privateRoutes';
 import Verify from './component/verify/verify';
 import EditEvent from './component/editEvent/editEvent';
+import MyMap from './component/map/map';
 
 function App() {
 	return (
@@ -30,7 +31,8 @@ function App() {
 					</Route>
 					<Route element={<PrivateRoutes />}>
 						<Route path="/events" element={<Event />} />
-						<Route path="/registered_event" element={<RegisteredEvent />} />
+
+						<Route path="/map" element={<MyMap />} />
 					</Route>
 				</Routes>
 			</div>

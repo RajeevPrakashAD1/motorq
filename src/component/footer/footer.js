@@ -32,6 +32,7 @@ export default Footer;
 const Wrapper = styled.div`
 	position: fixed;
 	bottom: 0;
+	right: 0;
 	background-color: #f5f5f5;
 	padding: 20px;
 `;

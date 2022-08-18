@@ -67,7 +67,7 @@ export const checkClash = async (eventName, date, st, et) => {
 
 			update = false;
 		} else {
-			console.log('length', events.length);
+			//console.log('length', events.length);
 
 			for (let i of events) {
 				if (i == eventName) {
@@ -75,9 +75,11 @@ export const checkClash = async (eventName, date, st, et) => {
 					return;
 				} else {
 					const res3 = await Submit({ eventName: i }, '/oneEvent', 'post');
-					const eventDetail = res3.data.data;
+					if (res3 && res3.data) {
+						var eventDetail = res3.data.data;
+					}
 					//console.log('event Details', eventDetail.startTime.split(':')[0]);
-					if (date == eventDetail.date) {
+					if (eventDetail && date == eventDetail.date) {
 						const rst = Date.parse(date + ' ' + st);
 						const ret = Date.parse(date + ' ' + et);
 						const cst = Date.parse(eventDetail.date + ' ' + eventDetail.startTime);
@@ -90,6 +92,8 @@ export const checkClash = async (eventName, date, st, et) => {
 						} else if (ret == cet) {
 							update = false;
 						} else if (cet > rst && cet < ret) {
+							update = false;
+						} else if (rst < cst && ret > cst) {
 							update = false;
 						}
 					}

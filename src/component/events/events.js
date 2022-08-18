@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -11,6 +11,7 @@ import EventDiv from './eventdiv';
 const Event = () => {
 	const event = useSelector((state) => state.event.event[0]);
 	//console.log('event', event);
+	const [ s, ss ] = useState('');
 	useEffect(() => {
 		//console.log('calling getEvents');
 		getEvents();
@@ -19,8 +20,20 @@ const Event = () => {
 		<React.Fragment>
 			<Header />
 			<h1>Events</h1>
+			<input
+				style={{ border: '5px solid green' }}
+				type="text"
+				value={s}
+				onChange={(e) => ss(e.target.value)}
+				placeholder="search here"
+			/>
 
-			<Wrapper>{event && event.map((e) => <EventDiv data={e} />)}</Wrapper>
+			<Wrapper>
+				{event &&
+					event
+						.filter((e) => e.eventName.toLowerCase().includes(s.toLowerCase()))
+						.map((e) => <EventDiv data={e} />)}
+			</Wrapper>
 		</React.Fragment>
 	);
 };
@@ -28,7 +41,7 @@ const Event = () => {
 export default Event;
 
 const Wrapper = styled.div`
-	background-color: white;
+	background-color: grey;
 
 	display: flex;
 	flex-direction: column;

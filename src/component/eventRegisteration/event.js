@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Header from '../header/header';
 import { Submit } from './../../configApi/function';
+import Button from 'react-bootstrap/Button';
 
 const RegisterEvent = () => {
 	const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -56,7 +57,9 @@ const RegisterEvent = () => {
 						</div>
 
 						<div className="button-container">
-							<input type="submit" />
+							<Button variant="primary" type="submit">
+								Submit{' '}
+							</Button>
 						</div>
 					</form>
 				</div>
@@ -74,12 +77,15 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	width: 100vw;
+	height: 100vh;
 	.input-container {
 		${'' /* background-color: #fff; */} margin: 20px;
 		width: 300px;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		justify-content: space-around;
+		justify-content: space-between;
+		background-color: #42f5d1;
 	}
 `;
