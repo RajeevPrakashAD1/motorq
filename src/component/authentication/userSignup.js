@@ -12,7 +12,7 @@ const UserSignup = () => {
 		console.log('submitted');
 		console.log(data);
 		const res = await Submit(data, '/register', 'post');
-		console.log(res);
+		if (res) alert('success');
 	};
 	return (
 		<React.Fragment>

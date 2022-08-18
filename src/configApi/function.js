@@ -24,14 +24,14 @@ export const Submit = async (data, gurl, method) => {
 			console.log(url, ' response = ', response);
 			// NotifySuccess('success! ' + response.data.message !== '' ? response.data.message : 'success');
 			// NotifySuccess('success!');
-			alert("'success!'");
+
 			return response;
 		} catch (err) {
 			//console.log('error..................', err);
 			if (err.response.status === 409) {
 				alert('conflict user already registered');
 			} else {
-				alert("'error!'");
+				console.log("'error!'");
 				// NotifyDanger(err.message);
 				// NotifyDanger('plz try again');
 			}
@@ -43,7 +43,7 @@ export const Submit = async (data, gurl, method) => {
 			console.log(url, ' response = ', response);
 			// NotifySuccess('success ' + response.data.message);
 			// NotifySuccess('success!');
-			alert('success!');
+
 			return response;
 		} catch (err) {
 			console.log(err);

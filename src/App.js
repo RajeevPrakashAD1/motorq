@@ -8,6 +8,9 @@ import AdminLogin from './component/authentication/adminLogin';
 import UserLogin from './component/authentication/userLogin';
 import UserSignup from './component/authentication/userSignup';
 import RegisterEvent from './component/eventRegisteration/event';
+import Event from './component/events/events';
+import RegisteredEvent from './component/registeredEvents/registeredEvent';
+import { PrivateRoutes, AdminPrivateRoutes } from './component/authentication/privateRoutes';
 
 function App() {
 	return (
@@ -18,7 +21,13 @@ function App() {
 					<Route path="/adminLogin" element={<AdminLogin />} />
 					<Route path="/login" element={<UserLogin />} />
 					<Route path="/signup" element={<UserSignup />} />
-					<Route path="/registerEvent" element={<RegisterEvent />} />
+					<Route element={<AdminPrivateRoutes />}>
+						<Route path="/registerEvent" element={<RegisterEvent />} />
+					</Route>
+					<Route element={<PrivateRoutes />}>
+						<Route path="/events" element={<Event />} />
+						<Route path="/registered_event" element={<RegisteredEvent />} />
+					</Route>
 				</Routes>
 			</div>
 		</Router>

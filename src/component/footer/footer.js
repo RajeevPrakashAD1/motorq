@@ -12,9 +12,9 @@ const Footer = () => {
 						Admin Login
 					</Button>
 				</Link>
-				<Link to="/addevent">
+				<Link to="/registerEvent">
 					<Button className="m-1" variant="outline-secondary">
-						addEvent
+						Register Event
 					</Button>
 				</Link>
 				<Link to="/verifyuser">

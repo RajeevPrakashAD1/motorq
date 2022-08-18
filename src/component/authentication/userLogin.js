@@ -3,15 +3,24 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Header from '../header/header';
+import { Link, useNavigate } from 'react-router-dom';
 import { Submit } from './../../configApi/function';
 
 const UserLogin = () => {
 	const { register, handleSubmit, watch, formState: { errors } } = useForm();
-
+	const navigate = useNavigate();
 	const onSubmit = async (data) => {
-		console.log('submitted');
 		const res = await Submit(data, '/login', 'post');
-		console.log(res);
+		if (res.status === 200) {
+			alert('success');
+			localStorage.setItem('user', res.data.data.phoneNumber);
+			localStorage.setItem('isLoggedIn', true);
+			setTimeout(function() {
+				navigate('/');
+			}, 1000);
+		} else {
+			alert('failed');
+		}
 	};
 	return (
 		<React.Fragment>

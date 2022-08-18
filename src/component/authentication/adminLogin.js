@@ -11,11 +11,17 @@ const AdminLogin = () => {
 	const onSubmit = async (data) => {
 		console.log('submitted');
 		const res = await Submit(data, '/adminlogin', 'post');
-		console.log(res);
+		if (res.status == 200) {
+			alert('success');
+			localStorage.setItem('admin', 'true');
+		} else {
+			alert('fail');
+		}
 	};
 	return (
 		<React.Fragment>
 			<Header />
+			<h1>Admin Login</h1>
 			<Wrapper>
 				<div className="form">
 					<form onSubmit={handleSubmit(onSubmit)}>

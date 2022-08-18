@@ -5,17 +5,13 @@ import axios from 'axios';
 import Header from '../header/header';
 import { Submit } from './../../configApi/function';
 
-const RegisterEvent = () => {
+const RegisterForEvent = () => {
 	const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
 	const onSubmit = async (data) => {
 		console.log(data);
 		const res = await Submit(data, '/createEvent', 'post');
-		if (res.status === 200) {
-			alert('success');
-		} else {
-			alert('duplicate name error');
-		}
+		console.log(res);
 	};
 	return (
 		<React.Fragment>
@@ -65,7 +61,7 @@ const RegisterEvent = () => {
 	);
 };
 
-export default RegisterEvent;
+export default RegisterForEvent;
 
 const Wrapper = styled.div`
 	background-color: grey;
